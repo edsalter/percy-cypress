@@ -2,20 +2,16 @@
   "name": "@percy/cypress",
   "version": "2.3.1",
   "description": "Cypress client library for visual regression testing with Percy (https://percy.io).",
-  "main": "dist/index.js",
+  "main": "index.js",
   "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
   "scripts": {
-    "pretest": "yarn build",
     "test": "percy exec -- node run-tests.js",
-    "test:debug": "LOG_LEVEL=debug yarn test",
-    "clean": "rm -rf dist/",
-    "build": "yarn clean && tsc",
-    "prepublish": "yarn build",
-    "lint": "tslint -p . -t stylish --fix",
+    "lint": "eslint .",
     "cypress:open": "cypress open"
-  },
-  "resolutions": {
-    "ecstatic": "3.2.2"
   },
   "repository": {
     "type": "git",
@@ -34,21 +30,16 @@
   },
   "homepage": "https://github.com/percy/percy-cypress#readme",
   "devDependencies": {
-    "@oclif/tslint": "^3.1.0",
+    "@percy/cli": "^1.0.0-beta.12",
     "@semantic-release/changelog": "^5.0.0",
     "@semantic-release/git": "^9.0.0",
     "cypress": "^5.1.0",
-    "http-server": "^0.12.0",
-    "semantic-release": "^17.0.4",
-    "tslint": "^6.0.0",
-    "typescript": "^4.0.2"
-  },
-  "dependencies": {
-    "@percy/agent": "~0",
-    "axios": "^0.20.0"
+    "express": "^4.17.1",
+    "semantic-release": "^17.0.4"
   },
   "peerDependencies": {
-    "cypress": "^3 || ^4"
+    "@percy/cli": "^1",
+    "cypress": "^3 || ^4 || ^5"
   },
   "release": {
     "plugins": [
