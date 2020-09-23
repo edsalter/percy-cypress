@@ -28,7 +28,7 @@ function isPercyEnabled() {
 
 // Take a DOM snapshot and post it to the snapshot endpoint
 Cypress.Commands.add('percySnapshot', (name, options) => {
-  if (!name) throw new Error('The `name` argument is required.');
+  name = name || cy.state('runnable').fullTitle();
 
   // avoid mixing promises and commands
   return cy.then(isPercyEnabled).then(result => {
@@ -51,7 +51,8 @@ Cypress.Commands.add('percySnapshot', (name, options) => {
       }).then(({ body: { success, error } }) => {
         if (!success) throw new Error(error);
       }).catch(err => {
-        console.log(`Could not take DOM snapshot "${name}"\n${err.stack}`);
+        console.error(`Could not take DOM snapshot "${name}"`);
+        console.error(err);
       });
     });
   });
